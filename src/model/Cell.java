@@ -1,7 +1,7 @@
 package model;
 
 public class Cell {
-    private Integer actualValue;
+    private Integer actualValue = 0;
     private final int trueValue;
     private final boolean fixed;
 
@@ -31,6 +31,6 @@ public class Cell {
     }
 
     public void clearCell() {
-        setActualValue(null);
+        setActualValue(0);
     } 
 }

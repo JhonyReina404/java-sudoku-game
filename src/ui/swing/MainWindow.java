@@ -13,6 +13,7 @@ public class MainWindow extends JFrame{
 
         Validator validate = new Validator();
         GameService game = new GameService(validate);
+        game.startGame();
 
         setTitle("Sudoku");
         setSize(650, 650);
@@ -22,6 +23,8 @@ public class MainWindow extends JFrame{
         setLocationRelativeTo(null); // Centraliza
         BoardPanel boardPanel = new BoardPanel(game);
         add(boardPanel);
+        ActionPanel actionPanel = new ActionPanel(game);
+        add(actionPanel, BorderLayout.SOUTH);
         setVisible(true);
 
     }

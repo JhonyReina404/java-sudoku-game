@@ -14,8 +14,15 @@ public class GameService {
     }
 
     public void startGame() {
-        board = new PuzzleFactory().createBoard();
+        PuzzleFactory puzzleFactory = new PuzzleFactory();
+        board = puzzleFactory.createBoard();
     }
+
+    public void restartGame() {
+        board = null;
+        startGame();
+    }
+
 
     public void makeMove(int row, int col, Integer value) {
         if(v.isValidValue(value) && v.isValidPosition(row, col, board.getCell(row, col))  ) {

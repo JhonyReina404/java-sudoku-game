@@ -30,29 +30,32 @@ public class PuzzleFactory {
             { 0, 0, 0, 4, 1, 9, 0, 0, 5 },
             { 0, 0, 0, 0, 8, 0, 0, 7, 9 }};
 
-    public Board createBoard() {
-        List<List<Cell>> cells = new ArrayList<>();
+    public List<List<Cell>> cells = new ArrayList<>();
+    public Board board = new Board(cells);
+    
+    public PuzzleFactory() {
 
         for (int i = 0; i < 9; i++) {
-            List<Cell> line = new ArrayList<>();       
-            
+            List<Cell> line = new ArrayList<>();
+
             for (int j = 0; j < 9; j++) {
                 int AnsValue = solution[i][j];
                 int PuzzleValue = puzzle[i][j];
 
-                boolean isFixed = (AnsValue == PuzzleValue)? true : false;
-                
+                boolean isFixed = (AnsValue == PuzzleValue) ? true : false;
+
                 Cell cell = new Cell(AnsValue, isFixed);
 
                 if (isFixed) {
                     cell.setActualValue(PuzzleValue);
                 }
                 line.add(cell);
-                //System.out.print(cell.getTrueValue() + " ");
             }
-            //System.out.println();
             cells.add(line);
         }
-        return new Board(cells);
+    }
+
+    public Board createBoard() {
+        return board;
     }
 }

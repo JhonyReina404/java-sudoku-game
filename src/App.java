@@ -1,8 +1,3 @@
-import model.BoardTemplate;
-import service.GameService;
-import service.PuzzleFactory;
-import service.Validator;
-import ui.ConsoleUI;
 import ui.swing.MainWindow;
 
 public class App {

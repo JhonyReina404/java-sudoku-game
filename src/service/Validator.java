@@ -8,36 +8,36 @@ import model.Cell;
 
 public class Validator {
 
-    public boolean isValidValue(Integer value) {
-        if(value >= 1 && value <= 9) { return true;}
+    public boolean isValidValue(Integer value) { //checks if the value is acceptable
+        if(value >= 0 && value <= 9) { return true;}
         else{return false;}
     }
 
-    public boolean isValidPosition(int posRow, int posCol, Cell cell) {
-        if((posRow >= 1 && posRow <= 9) && (posCol >= 1 && posCol <= 9) && (!cell.isFixed())) { return true;}
+    public boolean isValidPosition(int posRow, int posCol, Cell cell) {//checks if the position is valid
+        if((posRow >= 0 && posRow <= 8) && (posCol >= 0 && posCol <= 8) && (!cell.isFixed())) { return true;}
         else{return false;}
     } 
 
-    public boolean isPlayValidLine(Board board, int indexLine, Integer value) {
+    public boolean isPlayValidLine(Board board, int indexLine, Integer value) {//Checks if there are no repeated numbers in the row.
         List<Cell> line = board.getLine(indexLine);
         return line.stream().noneMatch(cell -> cell.getActualValue() != null && cell.getActualValue() == value);
     }
     
-    public boolean isPlayValidColumn(Board board, int indexLine, Integer value) {
+    public boolean isPlayValidColumn(Board board, int indexLine, Integer value) {//Checks if there are no repeated numbers in the column.
         List<Cell> line = board.getCol(indexLine);
         return line.stream().noneMatch(cell -> cell.getActualValue() != null && cell.getActualValue() == value);
     }
 
-    public boolean isValidMoveBlock(Board board, int indexRow, int indexCol, Integer value) {
+    public boolean isValidMoveBlock(Board board, int indexRow, int indexCol, Integer value) {//Checks if there are no repeated numbers in the block.
         List<Cell> block = board.getBlock(indexRow, indexCol);
         return block.stream().noneMatch(cell -> cell.getActualValue() != null && cell.getActualValue() == value);
     }
 
-    public boolean boardIsComplete(Board board) {
+    public boolean boardIsComplete(Board board) {//Checks if the board is fully.
         return !(board.getBoard().stream().flatMap(List::stream).anyMatch(cell -> cell.getActualValue() == null));
     }
     
-    public boolean boardIsSolved(Board board) {
+    public boolean boardIsSolved(Board board) {//Checks if the full board is correct
         return boardIsComplete(board) &&
                (board.getBoard().stream().flatMap(List::stream).allMatch(cell -> Objects.equals(cell.getActualValue(), cell.getTrueValue())));
     }
