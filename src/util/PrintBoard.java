@@ -14,6 +14,7 @@ public class PrintBoard {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void puzzleBoard(Board matriz) {
@@ -27,5 +28,6 @@ public class PrintBoard {
             }
             System.out.println();
         }
+        System.out.println();
     }    
 }

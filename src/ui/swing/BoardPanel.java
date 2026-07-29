@@ -15,9 +15,15 @@ import javax.swing.JOptionPane;
 public class BoardPanel extends JPanel {
 
     public final GameService game;
+    private final JTextField[][] cellFields = new JTextField[9][9];
 
     public BoardPanel(GameService game) {
-        this.game = game;
+        this.game = game;  
+        createField();
+        refreshBoard();
+    }
+
+    private void createField() {
         setLayout(new GridLayout(9, 9, 2, 2));
 
         for (int r = 0; r < 9; r++) {
@@ -25,16 +31,10 @@ public class BoardPanel extends JPanel {
 
                 JTextField cell = createCell();
                 cell.setBackground(Color.WHITE);
-                Cell cellModel = game.getBoard().getCell(r, c);
-
-                if(game.getBoard().getCell(r, c).isFixed()) {
-                    String text = String.valueOf(cellModel.getTrueValue());
-                    cell.setText(text);
-                    cell.setEditable(false);
-                }
                 cell.putClientProperty("row", r);
                 cell.putClientProperty("col", c);
-                add(cell);
+                cellFields[r][c] = cell;
+                add(cell);        
             }
         }
     }
@@ -48,27 +48,34 @@ public class BoardPanel extends JPanel {
         return cell;
     }
 
-    private void refreshBoard() {
+    public void refreshBoard() {
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                Cell cellModel = game.getBoard().getCell(r, c);
 
+                if(cellModel.isFixed()) {
+                    String text = String.valueOf(cellModel.getTrueValue());
+                    cellFields[r][c].setText(text);
+                    cellFields[r][c].setEditable(false);
+                } else {
+                    cellFields[r][c].setText("");
+                }
+            }
+        }
     }
 
     private void setupCellFocus(JTextField cellField) {
 
-        // Instancia o FocusAdapter de forma anônima, direto dentro do parâmetro
         cellField.addFocusListener(new FocusAdapter() {
 
             @Override
-            public void focusGained(FocusEvent e) { 
-                // Obtém a referência do JTextField que acabou de receber o foco
-                JTextField sourceField = (JTextField) e.getSource(); // Ou (JTextField) e.getComponent();
-
-                // Exemplo de ação: destaca a célula selecionada mudando a cor de fundo
+            public void focusGained(FocusEvent e) {
+                JTextField sourceField = (JTextField) e.getSource(); 
                 sourceField.setBackground(new Color(230, 240, 255));
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                System.out.println("dentro do lost focus");
                 JTextField sourceField = (JTextField) e.getSource();
 
                 Integer value;
@@ -95,15 +102,4 @@ public class BoardPanel extends JPanel {
             }
         });
     }
-
-//    cellField.addKeyListener(new KeyAdapter() {
-
-    /*public void keyTyped(KeyEvent e) {
-        char c = e.getKeyChar();
-        
-        // Se NÃO for um dígito entre '1' e '9' OU se o campo já tiver 1 caractere digitado
-        if (c < '1' || c > '9' || cellField.getText().length() >= 1) {
-            e.consume(); // Cancela o evento (o caractere não entra no campo)
-        }
-    }*/
 }

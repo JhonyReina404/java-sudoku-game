@@ -42,21 +42,3 @@ public class Validator {
                (board.getBoard().stream().flatMap(List::stream).allMatch(cell -> Objects.equals(cell.getActualValue(), cell.getTrueValue())));
     }
 }
-/*
-
-Mais tarde você pode fazer algo interessante. Isso abre espaço para um botão "Verificar tabuleiro" quando você migrar para Swing.
-
-O Validator pode responder:
-
-Existem 3 conflitos.
-
-Ou
-
-As posições erradas são:
-
-(2,4)
-
-(5,7)
-
-(8,1)
-*/

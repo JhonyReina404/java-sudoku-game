@@ -20,7 +20,8 @@ public class GameService {
 
     public void restartGame() {
         board = null;
-        startGame();
+        PuzzleFactory puzzleFactory = new PuzzleFactory();
+        board = puzzleFactory.createBoard();
     }
 
 
@@ -42,6 +43,11 @@ public class GameService {
 
     public Board getBoard() {
         return board;
+    }
+
+    public boolean isConclude() {
+        if(v.boardIsComplete(board)) {return v.boardIsSolved(board);}
+        else{return false;}
     }
 
     public void gameState() {

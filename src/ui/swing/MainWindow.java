@@ -23,11 +23,32 @@ public class MainWindow extends JFrame{
         setLocationRelativeTo(null); // Centraliza
         BoardPanel boardPanel = new BoardPanel(game);
         add(boardPanel);
-        ActionPanel actionPanel = new ActionPanel(game);
+        
+        ActionPanel actionPanel = new ActionPanel();
         add(actionPanel, BorderLayout.SOUTH);
+
+        actionPanel.setupButtonReset(e -> {
+            System.out.println("Reset solicitado");
+            game.restartGame();
+            boardPanel.refreshBoard();
+        });
+
+        actionPanel.setupButtonSave(e -> {
+            System.out.println("save solicitado");
+        });
+
+        actionPanel.setupButtonConclude(e -> {
+            System.out.println("conclude solicitado");
+            if(game.isConclude()){
+                JOptionPane.showMessageDialog(null, "Parabens voce completou o jogo, uma nova partida irá iniciar automaticamente");
+            } else {JOptionPane.showMessageDialog(null, "O jogo não está correto");}
+        });
+
         setVisible(true);
 
     }
+
+
 }
 /*
 package ui;

@@ -1,20 +1,20 @@
 package ui.swing;
 
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import service.GameService;
 
 public class ActionPanel extends JPanel {
-
-    public final GameService game;    
-    JButton resetBtn = new JButton();
-    JButton saveBtn = new JButton();
-    JButton concludeBtn = new JButton();
+  
+    private JButton resetBtn = new JButton();
+    private JButton saveBtn = new JButton();
+    private JButton concludeBtn = new JButton();
     
-    public ActionPanel(GameService game) {
-        this.game = game;
+    public ActionPanel() {
         resetBtn.setText("Reset Game");
         saveBtn.setText("Save Game");
         concludeBtn.setText("Conclude Game");
@@ -22,22 +22,17 @@ public class ActionPanel extends JPanel {
         add(resetBtn);
         add(saveBtn);
         add(concludeBtn);
-
-        resetBtn.addActionListener(e -> setupButtonReset());
-        saveBtn.addActionListener(e -> setupButtonSave());
-        concludeBtn.addActionListener(e -> setupButtonConclude());
     }
 
-    private void setupButtonReset(){
-        System.out.println("Reset clicado");
-        game.restartGame();
+    public void setupButtonReset(ActionListener listener){
+        resetBtn.addActionListener(listener);
     }
 
-    private void setupButtonSave(){
-        System.out.println("Save clicado");
+    public void setupButtonSave(ActionListener listener){
+        saveBtn.addActionListener(listener);
     }
 
-    private void setupButtonConclude(){
-        System.out.println("Conclude clicado");
+    public void setupButtonConclude(ActionListener listener){
+        concludeBtn.addActionListener(listener);
     }
 }

@@ -5,35 +5,20 @@ import java.util.List;
 
 import model.Board;
 import model.Cell;
+import service.PuzzleData;
 
 public class PuzzleFactory {
 
-    int[][] solution = {
-            { 5, 3, 4, 6, 7, 8, 9, 1, 2 },
-            { 6, 7, 2, 1, 9, 5, 3, 4, 8 },
-            { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
-            { 8, 5, 9, 7, 6, 1, 4, 2, 3 },
-            { 4, 2, 6, 8, 5, 3, 7, 9, 1 },
-            { 7, 1, 3, 9, 2, 4, 8, 5, 6 },
-            { 9, 6, 1, 5, 3, 7, 2, 8, 4 },
-            { 2, 8, 7, 4, 1, 9, 6, 3, 5 },
-            { 3, 4, 5, 2, 8, 6, 1, 7, 9 }};
-
-    int[][] puzzle = {
-            { 5, 3, 0, 0, 7, 0, 0, 0, 0 },
-            { 6, 0, 0, 1, 9, 5, 0, 0, 0 },
-            { 0, 9, 8, 0, 0, 0, 0, 6, 0 },
-            { 8, 0, 0, 0, 6, 0, 0, 0, 3 },
-            { 4, 0, 0, 8, 0, 3, 0, 0, 1 },
-            { 7, 0, 0, 0, 2, 0, 0, 0, 6 },
-            { 0, 6, 0, 0, 0, 0, 2, 8, 0 },
-            { 0, 0, 0, 4, 1, 9, 0, 0, 5 },
-            { 0, 0, 0, 0, 8, 0, 0, 7, 9 }};
+    int[][] solution = new int[9][9];
+    int[][] puzzle = new int[9][9];
 
     public List<List<Cell>> cells = new ArrayList<>();
     public Board board = new Board(cells);
-    
+
     public PuzzleFactory() {
+        PuzzleRepository puzrepo = new PuzzleRepository();
+        this.puzzle = puzrepo.getPuzzles().get(0).getPuzzle();
+        this.solution = puzrepo.getPuzzles().get(0).getSolution();
 
         for (int i = 0; i < 9; i++) {
             List<Cell> line = new ArrayList<>();
@@ -53,6 +38,14 @@ public class PuzzleFactory {
             }
             cells.add(line);
         }
+    }
+    
+    public void setSolution(int[][] solution) {
+        this.solution = solution;
+    }
+
+    public void setPuzzle(int[][] puzzle) {
+        this.puzzle = puzzle;
     }
 
     public Board createBoard() {
