@@ -71,8 +71,10 @@ public class BoardPanel extends JPanel {
 
             @Override
             public void focusGained(FocusEvent e) {
-                JTextField sourceField = (JTextField) e.getSource(); 
-                sourceField.setBackground(new Color(230, 240, 255));
+                JTextField sourceField = (JTextField) e.getSource();
+                int row = (Integer) sourceField.getClientProperty("row");
+                int col = (Integer) sourceField.getClientProperty("col");                 
+                highlightRelatedCells(row, col);
             }
 
             @Override
@@ -95,9 +97,45 @@ public class BoardPanel extends JPanel {
                     game.clearMove(row, column);
                     JOptionPane.showMessageDialog(null, "Entrada invalida");
                 }
-
-                sourceField.setBackground(Color.WHITE);
+                clearHighlights();
             }
         });
     }
+
+    private void highlightRelatedCells(int row, int col) {
+
+        Color highlight = new Color(210,210,210);
+        Color selected = new Color(170, 170 , 170);
+
+        clearHighlights();
+
+        for (int c = 0; c < 9; c++) {
+            cellFields[row][c].setBackground(highlight);
+        }
+
+        for (int r = 0; r < 9; r++) {
+            cellFields[r][col].setBackground(highlight);
+        }
+
+        int startRow = (row / 3) * 3;
+        int startCol = (col / 3) * 3;
+
+        for (int r = startRow; r < startRow + 3; r++) {
+            for (int c = startCol; c < startCol + 3; c++) {
+                cellFields[r][c].setBackground(highlight);
+            }
+        }
+
+        cellFields[row][col].setBackground(selected);
+    }
+
+    private void clearHighlights() {
+
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                cellFields[r][c].setBackground(Color.WHITE);
+            }
+        }
+    }
+
 }
