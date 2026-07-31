@@ -1,12 +1,8 @@
 package ui.swing;
 
-
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import service.GameService;
 
 public class ActionPanel extends JPanel {
   
@@ -16,7 +12,7 @@ public class ActionPanel extends JPanel {
     
     public ActionPanel() {
         resetBtn.setText("Reset Game");
-        saveBtn.setText("Save Game");
+        saveBtn.setText("New Game");
         concludeBtn.setText("Conclude Game");
 
         add(resetBtn);

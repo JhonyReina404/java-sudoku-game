@@ -5,7 +5,6 @@ import java.util.List;
 
 import model.Board;
 import model.Cell;
-import service.PuzzleData;
 
 public class PuzzleFactory {
 
@@ -13,12 +12,11 @@ public class PuzzleFactory {
     int[][] puzzle = new int[9][9];
 
     public List<List<Cell>> cells = new ArrayList<>();
-    public Board board = new Board(cells);
+    public Board board;
 
-    public PuzzleFactory() {
-        PuzzleRepository puzrepo = new PuzzleRepository();
-        this.puzzle = puzrepo.getPuzzles().get(0).getPuzzle();
-        this.solution = puzrepo.getPuzzles().get(0).getSolution();
+    public PuzzleFactory(PuzzleData puzzleData) {
+        this.puzzle = puzzleData.getPuzzle();
+        this.solution = puzzleData.getSolution();
 
         for (int i = 0; i < 9; i++) {
             List<Cell> line = new ArrayList<>();
@@ -38,6 +36,7 @@ public class PuzzleFactory {
             }
             cells.add(line);
         }
+        this.board = new Board(cells);
     }
     
     public void setSolution(int[][] solution) {
@@ -51,4 +50,8 @@ public class PuzzleFactory {
     public Board createBoard() {
         return board;
     }
+
+    public Board createBoardBack() {
+        return board;
+    }    
 }

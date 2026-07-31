@@ -28,24 +28,22 @@ public class MainWindow extends JFrame{
         add(actionPanel, BorderLayout.SOUTH);
 
         actionPanel.setupButtonReset(e -> {
-            System.out.println("Reset solicitado");
             game.restartGame();
             boardPanel.refreshBoard();
         });
 
         actionPanel.setupButtonSave(e -> {
-            System.out.println("save solicitado");
+            game.startGame();
+            boardPanel.refreshBoard();
         });
 
         actionPanel.setupButtonConclude(e -> {
-            System.out.println("conclude solicitado");
             if(game.isConclude()){
-                JOptionPane.showMessageDialog(null, "Parabens voce completou o jogo, uma nova partida irá iniciar automaticamente");
-            } else {JOptionPane.showMessageDialog(null, "O jogo não está correto");}
+                JOptionPane.showMessageDialog(null, "Parabens voce completou o jogo!\nVocê pode iniciar um novo jogo ou feche a janela para sair.");
+            } else {JOptionPane.showMessageDialog(null, "O jogo não está correto.");}
         });
-
+        
         setVisible(true);
-
     }
 
 

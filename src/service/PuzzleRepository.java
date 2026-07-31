@@ -1,8 +1,6 @@
 package service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -10,7 +8,6 @@ import java.util.List;
 
 public class PuzzleRepository {
 
-    //private List<String> lines = new ArrayList<>();
     private List<PuzzleData> Puzzles = new ArrayList<>();
 
     public PuzzleRepository() {
@@ -35,12 +32,6 @@ public class PuzzleRepository {
         return linhas;        
     }
 
-    public List<PuzzleData> sortGame(){
-        List<PuzzleData> gamesorted = new ArrayList<>();
-
-        return gamesorted;
-    }
-
     public List<PuzzleData> popularMatrizes(List<String> linhas) {
         List<PuzzleData> puzzlesList = new ArrayList<>();
         String state = "none";
@@ -52,9 +43,11 @@ public class PuzzleRepository {
             linha = linha.trim();
 
             if (linha.equals("---")) {
-                PuzzleData puzzleData = new PuzzleData(puzData,solvData);
+              PuzzleData puzzleData = new PuzzleData(puzData,solvData);
                 puzzlesList.add(puzzleData);
-            }
+                puzData = new int[9][9];
+                solvData = new int[9][9];
+            }              
 
             if (linha.equalsIgnoreCase("#Puzzle")) {
                 state = "PUZZLE";
@@ -72,7 +65,8 @@ public class PuzzleRepository {
                     solvData[row][col] = Character.getNumericValue(linha.charAt(col));
                 }
                 row++;
-            } else {
+            }          
+            else {
                 continue;
             }
         }

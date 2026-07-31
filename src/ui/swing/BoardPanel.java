@@ -59,6 +59,7 @@ public class BoardPanel extends JPanel {
                     cellFields[r][c].setEditable(false);
                 } else {
                     cellFields[r][c].setText("");
+                    cellFields[r][c].setEditable(true);
                 }
             }
         }
@@ -85,16 +86,13 @@ public class BoardPanel extends JPanel {
                 if(valor.matches("[1-9]")) {
                     value = Integer.parseInt(valor);
                     game.makeMove(row, column, value);
-                    game.printBoard();
 
                 } else if(valor.equals("")) {
-                    game.makeMove(row, column, 0);
-                    game.printBoard();                    
+                    game.makeMove(row, column, 0);     
 
                 } else {
                     sourceField.setText("");
                     game.clearMove(row, column);
-                    game.printBoard();
                     JOptionPane.showMessageDialog(null, "Entrada invalida");
                 }
 

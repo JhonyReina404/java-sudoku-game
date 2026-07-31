@@ -1,29 +1,28 @@
 package service;
-
 import model.Board;
-import util.PrintBoard;
 
 public class GameService {
     /*
     iniciar jogo, fazer jogada, limpar célula, consultar o tabuleiro, verificar se venceu e reiniciar o jogo */
-    Board board;
+    private Board board;
     Validator v;
+    PuzzleData puzzleData;
 
     public GameService(Validator validator) {
         this.v = validator;
     }
 
     public void startGame() {
-        PuzzleFactory puzzleFactory = new PuzzleFactory();
+        RandomGame randomGame = new RandomGame();
+        this.puzzleData = randomGame.gamePicker();
+        PuzzleFactory puzzleFactory = new PuzzleFactory(puzzleData);
         board = puzzleFactory.createBoard();
     }
 
     public void restartGame() {
-        board = null;
-        PuzzleFactory puzzleFactory = new PuzzleFactory();
+        PuzzleFactory puzzleFactory = new PuzzleFactory(puzzleData);
         board = puzzleFactory.createBoard();
     }
-
 
     public void makeMove(int row, int col, Integer value) {
         if(v.isValidValue(value) && v.isValidPosition(row, col, board.getCell(row, col))  ) {
@@ -37,10 +36,6 @@ public class GameService {
         }
     }
 
-    public void printBoard(){
-        PrintBoard.puzzleBoard(board);
-    }   
-
     public Board getBoard() {
         return board;
     }
@@ -48,9 +43,5 @@ public class GameService {
     public boolean isConclude() {
         if(v.boardIsComplete(board)) {return v.boardIsSolved(board);}
         else{return false;}
-    }
-
-    public void gameState() {
-
-    }    
+    } 
 }
