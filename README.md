@@ -8,6 +8,12 @@ O projeto foi criado com o objetivo de praticar conceitos fundamentais da lingua
 
 ---
 
+## 📷 Interface
+
+![Tela principal](assets/screenshot.png)
+
+---
+
 ## ✨ Funcionalidades
 
 * Interface gráfica desenvolvida com Java Swing;
