@@ -10,7 +10,7 @@ O projeto foi criado com o objetivo de praticar conceitos fundamentais da lingua
 
 ## 📷 Interface
 
-![Tela principal](assets/screenshot.png)
+![Tela principal](assets/telaPrincial.png)
 
 ---
 
