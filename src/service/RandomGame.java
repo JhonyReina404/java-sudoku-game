@@ -21,16 +21,6 @@ public class RandomGame {
         solution = sort.get(randomIndex).getSolution();        
         PuzzleData gamePicked = new PuzzleData(puzzle, solution);
 
-        System.out.println(randomIndex);
-        System.out.println(sort.size());
-        imprimirItemLista(sort);
         return gamePicked;
-    }
-
-    public static void imprimirItemLista(List<PuzzleData> lista) {
-        for (PuzzleData item : lista) {
-            System.out.println(item.getPuzzle()[0][0]);
-            System.out.println(item.getSolution()[0][0]);
-        }
     }
 }
